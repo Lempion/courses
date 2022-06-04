@@ -6,10 +6,26 @@ class ConnectionDB
     private $dbname = 'coursbd';
     private $login = 'root';
     private $password = '';
+    private $db;
 
-    public function connect()
+    public function __construct()
     {
-        $db = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->login, $this->password);
-        return $db;
+        $this->db = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->login, $this->password);
+    }
+
+    public function getTable($label)
+    {
+        $sql = "SELECT * FROM $label";
+
+        $result = $this->db->query($sql);
+
+        if ($result){
+            $articles = $result->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return $sql;
+        }
+
+        return $articles;
+
     }
 }
