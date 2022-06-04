@@ -1,12 +1,3 @@
-<?php
-
-require '../db-connect/ConnectionDB.php';
-
-$dataBase = new ConnectionDB();
-
-$arrTexts = $dataBase->getTable('texts');
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,9 +35,9 @@ $arrTexts = $dataBase->getTable('texts');
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
-                            <form action="">
+                            <form action="addText.php" method="post">
                                 <label class="form-label" for="simpleinput">Text</label>
-                                <input type="text" id="simpleinput" class="form-control">
+                                <input type="text" id="simpleinput" class="form-control" name="textdb">
                                 <button class="btn btn-success mt-3">Submit</button>
                             </form>
                         </div>
