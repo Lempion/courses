@@ -1,55 +1,11 @@
 <?php
 
-require 'db-connect/ConnectionDB.php';
+require "../db-connect/ConnectionDB.php";
 
 $dataBase = new ConnectionDB();
 
-$pdo = $dataBase->connect();
+$arrEmployees = $dataBase->getTable('employees');
 
-$arrEmployees =
-    [
-        [
-            'imgPath' => 'sunny.png',
-            'imgAlt' => 'Sunny A.',
-            'information' => 'Sunny A. (UI/UX Expert)',
-            'position' => 'Lead Author',
-            'twitterId' => '@myplaneticket',
-            'btLink' => 'myorange',
-            'btContact' => 'Contact Sunny',
-            'banned' => false
-        ],
-        [
-            'imgPath' => 'josh.png',
-            'imgAlt' => 'Jos K.',
-            'information' => 'Jos K. (ASP.NET Developer)',
-            'position' => 'Partner &amp; Contributor',
-            'twitterId' => '@atlantez',
-            'btLink' => 'Walapa',
-            'btContact' => 'Contact Jos',
-            'banned' => true
-        ],
-        [
-            'imgPath' => 'jovanni.png',
-            'imgAlt' => 'Jovanni Lo',
-            'information' => 'Jovanni L. (PHP Developer)',
-            'position' => 'Partner &amp; Contributor',
-            'twitterId' => '@lodev09',
-            'btLink' => 'lodev09',
-            'btContact' => 'Contact Jovanni',
-            'banned' => true
-        ],
-        [
-            'imgPath' => 'roberto.png',
-            'imgAlt' => 'Jovanni Lo',
-            'information' => 'Roberto R. (Rails Developer)',
-            'position' => 'Partner &amp; Contributor',
-            'twitterId' => '@sildur',
-            'btLink' => 'sildur',
-            'btContact' => 'Contact Roberto',
-            'banned' => false
-        ],
-
-    ];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,34 +44,37 @@ $arrEmployees =
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
+                        <?php if (!$arrEmployees['ERROR']): ?>
+                            <?php foreach ($arrEmployees as $key => $dataEmployee): ?>
+                                <div class="<?php echo($dataEmployee['banned'] ? 'banned' : ''); ?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
+                                    <img src="/img/demo/authors/<?php echo $dataEmployee['imgPath']; ?>"
+                                         alt="<?php echo $dataEmployee['imgAlt']; ?>"
+                                         class="img-thumbnail img-responsive rounded-circle"
+                                         style="width:5rem; height: 5rem;">
+                                    <div class="ml-2 mr-3">
+                                        <h5 class="m-0">
+                                            <?php echo $dataEmployee['information']; ?>
+                                            <small class="m-0 fw-300">
+                                                <?php echo $dataEmployee['position']; ?>
+                                            </small>
+                                        </h5>
 
-                        <?php foreach ($arrEmployees as $key => $dataEmployee): ?>
-                            <div class="<?php echo($dataEmployee['banned'] ? 'banned' : ''); ?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                                <img src="/img/demo/authors/<?php echo $dataEmployee['imgPath']; ?>"
-                                     alt="<?php echo $dataEmployee['imgAlt']; ?>"
-                                     class="img-thumbnail img-responsive rounded-circle"
-                                     style="width:5rem; height: 5rem;">
-                                <div class="ml-2 mr-3">
-                                    <h5 class="m-0">
-                                        <?php echo $dataEmployee['information']; ?>
-                                        <small class="m-0 fw-300">
-                                            <?php echo $dataEmployee['position']; ?>
-                                        </small>
-                                    </h5>
 
+                                        <a href="https://twitter.com/<?php echo $dataEmployee['twitterId']; ?>"
+                                           class="text-info fs-sm"
+                                           target="_blank"><?php echo $dataEmployee['twitterId']; ?></a>
 
-                                    <a href="https://twitter.com/<?php echo $dataEmployee['twitterId']; ?>"
-                                       class="text-info fs-sm"
-                                       target="_blank"><?php echo $dataEmployee['twitterId']; ?></a>
-
-                                    -
-                                    <a href="https://wrapbootstrap.com/user/<?php echo $dataEmployee['btLink']; ?>"
-                                       class="text-info fs-sm"
-                                       target="_blank" title="<?php echo $dataEmployee['btContact']; ?>"><i
-                                                class="fal fa-envelope"></i></a>
+                                        -
+                                        <a href="https://wrapbootstrap.com/user/<?php echo $dataEmployee['btLink']; ?>"
+                                           class="text-info fs-sm"
+                                           target="_blank" title="<?php echo $dataEmployee['btContact']; ?>"><i
+                                                    class="fal fa-envelope"></i></a>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <h1><?php echo $arrEmployees['ERROR']; ?></h1>
+                        <? endif; ?>
                     </div>
                 </div>
             </div>

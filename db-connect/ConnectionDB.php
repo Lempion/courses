@@ -22,7 +22,7 @@ class ConnectionDB
         if ($result){
             $articles = $result->fetchAll(PDO::FETCH_ASSOC);
         }else{
-            return $sql;
+            return ['ERROR' => 'Ошибка получения данных'];
         }
 
         return $articles;
