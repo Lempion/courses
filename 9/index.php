@@ -1,8 +1,10 @@
 <?php
 
-require 'bd-connect/connect.php';
+require 'db-connect/ConnectionDB.php';
 
-$db = 1;
+$dataBase = new ConnectionDB();
+
+$pdo = $dataBase->connect();
 
 $arrEmployees =
     [
