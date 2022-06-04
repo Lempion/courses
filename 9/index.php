@@ -1,6 +1,6 @@
 <?php
 
-require "../db-connect/ConnectionDB.php";
+require "../database/ConnectionDB.php";
 
 $dataBase = new ConnectionDB();
 
