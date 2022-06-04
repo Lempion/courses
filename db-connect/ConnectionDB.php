@@ -13,19 +13,28 @@ class ConnectionDB
         $this->db = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->login, $this->password);
     }
 
-    public function getTable($label)
+    public function getTable($labelTable)
     {
-        $sql = "SELECT * FROM $label";
+        $sql = "SELECT * FROM $labelTable";
 
         $result = $this->db->query($sql);
 
-        if ($result){
+        if ($result) {
             $articles = $result->fetchAll(PDO::FETCH_ASSOC);
-        }else{
+        } else {
             return ['ERROR' => 'Ошибка получения данных'];
         }
 
         return $articles;
 
+    }
+
+    public function addText($labelTable,$fieldName, $text)
+    {
+        $sql = "INSERT INTO $labelTable ($fieldName) VALUES ('$text')";
+
+        $result = $this->db->exec($sql);
+
+        return $result;
     }
 }
