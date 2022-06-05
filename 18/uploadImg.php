@@ -1,9 +1,12 @@
 <?php
+session_start();
 
 $file = getimagesize($_FILES['imagesdb']['tmp_name']);
 
-if (!$file) {
-    return ['ERROR' => 'Файл не является изображением'];
+if (!$_FILES['imagesdb'] || !$file) {
+    $_SESSION['ANSWER'] = ['ERROR' => 'Ошибка загрузки файла'];
+    header('Location:/18');
+    exit();
 }
 
 require '../database/ConnectionDB.php';
@@ -21,14 +24,14 @@ $filename = uniqid() . ".$exec";
 $uploadfile = "../18/images/$filename";
 
 if (move_uploaded_file($_FILES['imagesdb']['tmp_name'], $uploadfile)) {
-    echo '<pre>';
-    print_r($_FILES['imagesdb']);
-    print_r($file);
-    print_r($filename);
-    echo '</pre>';
+    $result = $database->uploadImage($filename);
+
+    $_SESSION['ANSWER'] = $result;
+    header('Location:/18');
+    exit();
 } else {
-    return ['ERROR' => 'Ошибка загрузки'];
+    $_SESSION['ANSWER'] = ['ERROR' => 'Ошибка загрузки в БД'];
+    header('Location:/18');
+    exit();
 }
-
-
 ?>

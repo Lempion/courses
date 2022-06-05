@@ -99,4 +99,31 @@ class ConnectionDB
 
     }
 
+    public function uploadImage($labelImg)
+    {
+        $sql = $this->db->prepare("INSERT INTO `files` (`label`) VALUES (:label)");
+
+        $result = $sql->execute(['label' => $labelImg]);
+
+        if ($result) {
+            return ['ACCEPT' => 'Картинка успешно загружена'];
+        } else {
+            return ['ERROR' => 'Ошибка загрузки файла в БД'];
+        }
+    }
+
+    public function getImages()
+    {
+        $sql = "SELECT `label` FROM `files`";
+
+        $result = $this->db->query($sql);
+
+        if ($result) {
+            $labels = $result->fetchAll(PDO::FETCH_ASSOC);
+            return $labels;
+        } else {
+            return ['ERROR' => 'Ошибка получения данных из БД'];
+        }
+    }
+
 }

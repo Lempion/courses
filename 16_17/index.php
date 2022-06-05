@@ -48,7 +48,7 @@ if ($message && $message['ACCEPT']){
                         <div class="panel-content">
                             <?php if ($_SESSION['USER']): ?>
                                 <div class="alert alert-success fade show" role="alert">
-                                    <p>Вы вошли как: <i><?php echo $_SESSION['USER']; ?></i></p>
+                                    Вы вошли как: <i><?php echo $_SESSION['USER']; ?></i>
                                 </div>
                                 <form action="logout.php" method="post">
                                     <button class="btn btn-success mt-3">Выйти</button>
