@@ -40,11 +40,13 @@ class ConnectionDB
 
     public function addTextUniq($labelTable, $fieldName, $text)
     {
-        $sql = "SELECT * FROM $labelTable WHERE $fieldName = $text";
+        $sql = $this->db->prepare("SELECT * FROM $labelTable WHERE $fieldName = ?");
 
-        $result = $this->db->query($sql);
+        $sql->execute($text);
 
-        return $sql;
+        $result = $sql->fetchColumn();
+
+        return $result;
     }
 
 }
