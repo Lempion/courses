@@ -47,12 +47,12 @@ class ConnectionDB
         $result = $sql->fetchColumn();
 
         if ($result) {
-            return 'false';
+            return ['ERROR' => 'You should check in on some of those fields below.'];
         }
 
         $resultAddText = $this->addText($labelTable, $fieldName, $text);
 
-        return $resultAddText;
+        return ['ACCEPT' => $text];
     }
 
     public function regUser($email, $password)
