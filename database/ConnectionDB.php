@@ -44,7 +44,7 @@ class ConnectionDB
 
         $result = $this->db->query($sql);
 
-        return $sql;
+        return $result;
     }
 
 }
