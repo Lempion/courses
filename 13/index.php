@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+echo $_SESSION['ANSWER'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -66,14 +66,13 @@ class ConnectionDB
             return 'ACCOUNT_REGISTER';
         }
 
-        $passwordHash = password_hash($password, 'PASSWORD_DEFAULT');
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = $this->db->prepare("INSERT INTO `regusers` (`email`,`password`) VALUES (:email,:password)");
 
-        $sql->execute([':email' => $email, ':password' => $passwordHash]);
+        $sql->execute(['email' => $email, 'password' => $passwordHash]);
 
-        return $sql;
-
+        return 'USER_REGISTERED';
     }
 
 }
