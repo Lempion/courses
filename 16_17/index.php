@@ -2,6 +2,11 @@
 session_start();
 
 $message = $_SESSION['ANSWER'];
+
+if ($message && $message['ACCEPT']){
+    $_SESSION['USER'] = $message['ACCEPT'];
+}
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -25,7 +30,6 @@ $message = $_SESSION['ANSWER'];
     </head>
     <body class="mod-bg-1 mod-nav-link ">
     <main id="js-page-content" role="main" class="page-content">
-        <?php echo($_SESSION['USER'] ? '<p>Вы вошли как: <i>' . $_SESSION['USER'] . '</i></p>' : ''); ?>
         <div class="col-md-6">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
@@ -42,15 +46,21 @@ $message = $_SESSION['ANSWER'];
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-content">
+                            <?php if ($_SESSION['USER']): ?>
+                                <div class="alert alert-success fade show" role="alert">
+                                    <p>Вы вошли как: <i><?php echo $_SESSION['USER']; ?></i></p>
+                                </div>
+                                <form action="logout.php" method="post">
+                                    <button class="btn btn-success mt-3">Выйти</button>
+                                </form>
+                            <?php else: ?>
                             <div class="form-group">
 
                                 <?php if ($message && $message['ERROR']): ?>
                                     <div class="alert alert-danger fade show" role="alert">
                                         <?php echo $message['ERROR']; ?>
                                     </div>
-                                <?php elseif ($message && $message['ACCEPT']):
-                                    $_SESSION['USER'] = $message['ACCEPT'];
-                                    ?>
+                                <?php elseif ($message && $message['ACCEPT']):?>
                                     <div class="alert alert-success fade show" role="alert">
                                         Вы успешно авторизовались!
                                     </div>
@@ -69,6 +79,8 @@ $message = $_SESSION['ANSWER'];
                                     <button class="btn btn-success mt-3">Submit</button>
                                 </form>
                                 <button class="btn btn-success mt-3"><a href="../13">Регистрация</a></button>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </div>

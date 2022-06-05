@@ -14,6 +14,6 @@ if ($_POST['email'] && $_POST['password']){
     $_SESSION['ANSWER'] = ['ERROR'=>'Все поля не были заполнены'];
 }
 
-header('Location:/16');
+header('Location:/16_17');
 
 ?>

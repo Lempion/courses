@@ -57,7 +57,7 @@ $message = $_SESSION['ANSWER'];
                                 <input type="password" name="password" id="simpleinput" class="form-control" required>
                                 <button class="btn btn-success mt-3">Submit</button>
                             </form>
-                            <button class="btn btn-success mt-3"><a href="../16">Авторизация</a></button>
+                            <button class="btn btn-success mt-3"><a href="../16_17">Авторизация</a></button>
                         </div>
                     </div>
                 </div>
