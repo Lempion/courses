@@ -37,9 +37,9 @@
                             <div class="alert alert-danger fade show" hidden role="alert">
                                 You should check in on some of those fields below.
                             </div>
-                            <form action="">
+                            <form action="addText.php" method="post">
                                 <label class="form-label" for="simpleinput">Text</label>
-                                <input type="text" id="simpleinput" class="form-control">
+                                <input type="text" id="simpleinput" class="form-control" name="textdb">
                                 <button class="btn btn-success mt-3">Submit</button>
                             </form>
                         </div>
