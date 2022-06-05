@@ -63,7 +63,7 @@ class ConnectionDB
         $user = $sql->fetchColumn();
 
         if ($user) {
-            return 'ACCOUNT_REGISTER';
+            return ['ERROR' => 'Этот эл адрес уже занят другим пользователем'];
         }
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
@@ -72,7 +72,7 @@ class ConnectionDB
 
         $sql->execute(['email' => $email, 'password' => $passwordHash]);
 
-        return 'USER_REGISTERED';
+        return ['ACCEPT' => 'Пользователь зарегистрирован'];
     }
 
 }

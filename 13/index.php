@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-echo $_SESSION['ANSWER'];
+$message = $_SESSION['ANSWER'];
 
 ?>
 <!DOCTYPE html>
@@ -42,14 +42,15 @@ echo $_SESSION['ANSWER'];
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
-                            <div class="alert alert-danger fade show" hidden role="alert">
-                                Этот эл адрес уже занят другим пользователем
+
+                            <div class="alert alert-danger fade show" <?php echo ($message['ERROR'] ? '' : 'hidden')?> role="alert">
+                                <?php echo $message['ERROR'];?>
                             </div>
 
                             <form action="task_13_handler.php" method="post">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" name="email" id="simpleinput" class="form-control">
+                                    <input type="email" name="email" id="simpleinput" class="form-control">
                                 </div>
 
                                 <label class="form-label" for="simpleinput">Password</label>
