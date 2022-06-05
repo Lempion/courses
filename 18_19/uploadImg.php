@@ -5,7 +5,7 @@ $file = getimagesize($_FILES['imagesdb']['tmp_name']);
 
 if (!$_FILES['imagesdb'] || !$file) {
     $_SESSION['ANSWER'] = ['ERROR' => 'Ошибка загрузки файла'];
-    header('Location:/18');
+    header('Location:/18_19');
     exit();
 }
 
@@ -21,17 +21,17 @@ $exec = substr(strstr($file['mime'], '/'), 1);
 
 $filename = uniqid() . ".$exec";
 
-$uploadfile = "../18/images/$filename";
+$uploadfile = "../18_19/images/$filename";
 
 if (move_uploaded_file($_FILES['imagesdb']['tmp_name'], $uploadfile)) {
     $result = $database->uploadImage($filename);
 
     $_SESSION['ANSWER'] = $result;
-    header('Location:/18');
+    header('Location:/18_19');
     exit();
 } else {
     $_SESSION['ANSWER'] = ['ERROR' => 'Ошибка загрузки в БД'];
-    header('Location:/18');
+    header('Location:/18_19');
     exit();
 }
 ?>

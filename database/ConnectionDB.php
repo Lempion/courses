@@ -114,7 +114,7 @@ class ConnectionDB
 
     public function getImages()
     {
-        $sql = "SELECT `label` FROM `files`";
+        $sql = "SELECT * FROM `files`";
 
         $result = $this->db->query($sql);
 
@@ -123,6 +123,31 @@ class ConnectionDB
             return $labels;
         } else {
             return ['ERROR' => 'Ошибка получения данных из БД'];
+        }
+    }
+
+    public function removeImages($id)
+    {
+
+        $sql = $this->db->prepare("SELECT * FROM `files` WHERE `id`=?");
+        $sql->execute(array($id));
+
+        if ($sql) {
+            $dataImg = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+            $idImg = $dataImg[0]['id'];
+            $labelImg = $dataImg[0]['label'];
+
+            $sql = $this->db->prepare("DELETE FROM `files` WHERE `id`=?");
+            $sql->execute(array($idImg));
+
+            unlink("../18_19/images/$labelImg");
+
+//            return ['sql' => $sql, 'id' => $idImg, 'path' => "../18_19/images/$labelImg", 'data' => $dataImg];
+            return ['ACCEPT'=>'Картинка удалена'];
+
+        } else {
+            return ['ERROR' => 'Ошибка удаления из БД'];
         }
     }
 

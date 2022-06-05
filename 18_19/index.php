@@ -8,6 +8,7 @@ $database = new ConnectionDB();
 $images = $database->getImages();
 
 $message = $_SESSION['ANSWER'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +96,7 @@ $message = $_SESSION['ANSWER'];
                                         <div class="col-md-3 image">
                                             <img style="width: 250px;height: 150px;"
                                                  src="images/<?php echo $dataImage['label']; ?>">
+                                            <a class="btn btn-danger" href="removeImg.php?id=<?php echo $dataImage['id']?>" onclick="confirm('Вы уверены?');">Удалить</a>
                                         </div>
                                     <? endforeach; ?>
                                 </div>
