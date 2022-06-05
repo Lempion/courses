@@ -46,13 +46,34 @@ class ConnectionDB
 
         $result = $sql->fetchColumn();
 
-        if ($result){
+        if ($result) {
             return 'false';
         }
 
-        $resultAddText = $this->addText($labelTable,$fieldName,$text);
+        $resultAddText = $this->addText($labelTable, $fieldName, $text);
 
         return $resultAddText;
+    }
+
+    public function regUser($email, $password)
+    {
+        $sql = $this->db->prepare("SELECT `email` FROM `regusers` WHERE `email` = ?");
+        $sql->execute(array($email));
+
+        $user = $sql->fetchColumn();
+
+        if ($user) {
+            return 'ACCOUNT_REGISTER';
+        }
+
+        $passwordHash = password_hash($password, 'PASSWORD_DEFAULT');
+
+        $sql = $this->db->prepare("INSERT INTO `regusers` (`email`,`password`) VALUES (:email,:password)");
+
+        $sql->execute([':email' => $email, ':password' => $passwordHash]);
+
+        return $sql;
+
     }
 
 }
