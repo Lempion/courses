@@ -75,14 +75,27 @@ class ConnectionDB
         return ['ACCEPT' => 'Пользователь зарегистрирован'];
     }
 
-    public function authUser($email, $password){
+    public function authUser($email, $password)
+    {
         $sql = $this->db->prepare("SELECT * FROM `regusers` WHERE `email` = ?");
 
         $sql->execute(array($email));
 
         $user = $sql->fetchAll();
 
-        return $user;
+        if (!$user) {
+            return ['ERROR' => "Пользователь $email не зарегистрирован"];
+        }
+
+        $checkPass = password_verify($password, $user[0]['password']);
+
+        if (!$checkPass) {
+            return ['ERROR' => "Логин или пароль введён не верно"];
+        }
+
+
+        return ['ACCEPT' => $email];
+
 
     }
 

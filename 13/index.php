@@ -50,11 +50,11 @@ $message = $_SESSION['ANSWER'];
                             <form action="task_13_handler.php" method="post">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="email" name="email" id="simpleinput" class="form-control">
+                                    <input type="email" name="email" id="simpleinput" class="form-control" required>
                                 </div>
 
                                 <label class="form-label" for="simpleinput">Password</label>
-                                <input type="password" name="password" id="simpleinput" class="form-control">
+                                <input type="password" name="password" id="simpleinput" class="form-control" required>
                                 <button class="btn btn-success mt-3">Submit</button>
                             </form>
                             <button class="btn btn-success mt-3"><a href="../16">Авторизация</a></button>
