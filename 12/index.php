@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,15 +29,17 @@
                     Задание
                 </h2>
                 <div class="panel-toolbar">
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
+                            data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
+                            data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
                 </div>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
-                            <div class="alert alert-danger fade show" hidden role="alert">
+                            <div class="alert alert-danger fade show" <?php echo ($_SESSION['ANSWER'] == 'false' ? '' : 'hidden' );?> role="alert">
                                 You should check in on some of those fields below.
                             </div>
                             <form action="addText.php" method="post">

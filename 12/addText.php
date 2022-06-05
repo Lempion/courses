@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require '../database/ConnectionDB.php';
 
@@ -6,6 +7,8 @@ $dataBase = new ConnectionDB();
 
 $result = $dataBase->addTextUniq('texts', 'text', $_POST['textdb']);
 
-echo "<h1>$result</h1>";
+$_SESSION['ANSWER'] = $result;
+
+header('Location:/12');
 
 ?>
