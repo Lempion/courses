@@ -42,11 +42,17 @@ class ConnectionDB
     {
         $sql = $this->db->prepare("SELECT * FROM $labelTable WHERE $fieldName = ?");
 
-        $sql->execute($text);
+        $sql->execute(array($text));
 
         $result = $sql->fetchColumn();
 
-        return $result;
+        if ($result){
+            return 'false';
+        }
+
+        $resultAddText = $this->addText($labelTable,$fieldName,$text);
+
+        return $resultAddText;
     }
 
 }
