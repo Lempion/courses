@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-$message = $_SESSION['ANSWER'];
-
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,32 +33,28 @@ $message = $_SESSION['ANSWER'];
                     Задание
                 </h2>
                 <div class="panel-toolbar">
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                            data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                            data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
                 </div>
             </div>
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="panel-content">
                         <div class="form-group">
-
-                            <div class="alert alert-danger fade show" <?php echo ($message['ERROR'] ? '' : 'hidden')?> role="alert">
-                                <?php echo $message['ERROR'];?>
+                            <div class="alert alert-danger fade show" hidden role="alert">
+                                Неверный логин или пароль
                             </div>
-
-                            <form action="task_13_handler.php" method="post">
+                            <form action="authUser.php" method="post">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="email" name="email" id="simpleinput" class="form-control">
+                                    <input type="email" id="simpleinput" class="form-control" name="email">
                                 </div>
 
                                 <label class="form-label" for="simpleinput">Password</label>
-                                <input type="password" name="password" id="simpleinput" class="form-control">
+                                <input type="password" id="simpleinput" class="form-control" name="password">
                                 <button class="btn btn-success mt-3">Submit</button>
                             </form>
-                            <button class="btn btn-success mt-3"><a href="../16">Авторизация</a></button>
+                            <button class="btn btn-success mt-3"><a href="../13">Регистрация</a></button>
                         </div>
                     </div>
                 </div>

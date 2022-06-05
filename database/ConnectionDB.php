@@ -75,4 +75,15 @@ class ConnectionDB
         return ['ACCEPT' => 'Пользователь зарегистрирован'];
     }
 
+    public function authUser($email, $password){
+        $sql = $this->db->prepare("SELECT * FROM `regusers` WHERE `email` = ?");
+
+        $sql->execute(array($email));
+
+        $user = $sql->fetchAll();
+
+        return $user;
+
+    }
+
 }
