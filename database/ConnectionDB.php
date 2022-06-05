@@ -29,7 +29,7 @@ class ConnectionDB
 
     }
 
-    public function addText($labelTable,$fieldName, $text)
+    public function addText($labelTable, $fieldName, $text)
     {
         $sql = "INSERT INTO $labelTable ($fieldName) VALUES ('$text')";
 
@@ -37,4 +37,14 @@ class ConnectionDB
 
         return $result;
     }
+
+    public function addTextUniq($labelTable, $fieldName, $text)
+    {
+        $sql = "SELECT * FROM $labelTable WHERE $fieldName = $text";
+
+        $result = $this->db->query($sql);
+
+        return $sql;
+    }
+
 }
