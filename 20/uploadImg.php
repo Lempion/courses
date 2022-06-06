@@ -19,14 +19,14 @@ foreach ($filesCheck as $key => $file) {
 
         $filename = uniqid() . ".$exec";
 
-        $uploadfile = "../18_19/images/$filename";
+        $uploadfile = "../images/$filename";
 
         $arrImg[] = $filename;
 
         if (!move_uploaded_file($file, $uploadfile)) {
 
             $_SESSION['ANSWER'] = ['ERROR' => 'Ошибка загрузки в БД'];
-            header('Location:/18_19');
+            header('Location:/20');
             exit();
 
         }
@@ -38,8 +38,7 @@ $database = new ConnectionDB();
 
 $result = $database->uploadImage($arrImg);
 
-
-echo '<pre>';
-print_r($arrImg);
-echo '</pre>';
+$_SESSION['ANSWER'] = $result;
+header('Location:/20');
+exit();
 

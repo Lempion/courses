@@ -95,7 +95,7 @@ $message = $_SESSION['ANSWER'];
                                     <?php foreach ($images as $key => $dataImage): ?>
                                         <div class="col-md-3 image">
                                             <img style="width: 250px;height: 150px;"
-                                                 src="images/<?php echo $dataImage['label']; ?>">
+                                                 src="../images/<?php echo $dataImage['label']; ?>">
                                             <a class="btn btn-danger" href="removeImg.php?id=<?php echo $dataImage['id']?>" onclick="confirm('Вы уверены?');">Удалить</a>
                                         </div>
                                     <? endforeach; ?>

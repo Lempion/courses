@@ -21,10 +21,10 @@ $exec = substr(strstr($file['mime'], '/'), 1);
 
 $filename = uniqid() . ".$exec";
 
-$uploadfile = "../18_19/images/$filename";
+$uploadfile = "../images/$filename";
 
 if (move_uploaded_file($_FILES['imagesdb']['tmp_name'], $uploadfile)) {
-    $result = $database->uploadImage($filename);
+    $result = $database->uploadImage(array($filename));
 
     $_SESSION['ANSWER'] = $result;
     header('Location:/18_19');

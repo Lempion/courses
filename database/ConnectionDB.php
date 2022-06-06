@@ -99,17 +99,20 @@ class ConnectionDB
 
     }
 
-    public function uploadImage($labelImg)
+    public function uploadImage(array $labelImg)
     {
+
         $sql = $this->db->prepare("INSERT INTO `files` (`label`) VALUES (:label)");
 
-        $result = $sql->execute(['label' => $labelImg]);
+        foreach ($labelImg as $key => $label) {
+            $result = $sql->execute(['label' => $label]);
 
-        if ($result) {
-            return ['ACCEPT' => 'Картинка успешно загружена'];
-        } else {
-            return ['ERROR' => 'Ошибка загрузки файла в БД'];
+            if (!$result) {
+                return ['ERROR' => 'Ошибка загрузки файла в БД'];
+            }
         }
+
+        return ['ACCEPT' => 'Успешно загружено'];
     }
 
     public function getImages()
@@ -141,10 +144,9 @@ class ConnectionDB
             $sql = $this->db->prepare("DELETE FROM `files` WHERE `id`=?");
             $sql->execute(array($idImg));
 
-            unlink("../18_19/images/$labelImg");
+            unlink("../images/$labelImg");
 
-//            return ['sql' => $sql, 'id' => $idImg, 'path' => "../18_19/images/$labelImg", 'data' => $dataImg];
-            return ['ACCEPT'=>'Картинка удалена'];
+            return ['ACCEPT' => 'Картинка удалена'];
 
         } else {
             return ['ERROR' => 'Ошибка удаления из БД'];
